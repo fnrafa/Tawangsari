@@ -15,6 +15,7 @@ use Illuminate\Support\Str;
  * @property mixed $google_map_link
  * @property mixed $title
  * @property mixed $owner
+ * @property mixed $category
  * @method static where(string $string, $uuid)
  */
 class Umkm extends Model

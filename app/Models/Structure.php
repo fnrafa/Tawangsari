@@ -35,7 +35,7 @@ class Structure extends Model
     protected $casts = [
         'uuid' => 'string',
         'name' => 'string',
-        'level' => 'integer',
+        'level' => 'string',
         'upper_level_uuid' => 'string',
         'image_path' => 'string',
         'nip' => 'string',

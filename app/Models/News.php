@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
  * @property mixed $title
  * @property mixed $content
  * @property mixed $uploaded_by
+ * @property false|mixed|string $image_path
  * @method static where(string $column, $value, $value2 = 0)
  */
 class News extends Model
@@ -24,6 +25,7 @@ class News extends Model
     protected $fillable = [
         'title',
         'content',
+        'image_path',
         'uploaded_by',
     ];
 

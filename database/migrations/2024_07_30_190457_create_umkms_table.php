@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('owner');
             $table->string('contact_person');
             $table->string('image_path');
+            $table->string('category');
             $table->string('google_map_link');
             $table->timestamps();
         });

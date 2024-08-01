@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
@@ -29,13 +30,17 @@ class NewsController extends Controller
         try {
             $request->validate([
                 'title' => 'required|string|max:255',
-                'content' => 'required|string'
+                'content' => 'required|string',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             ]);
+
+            $path = $request->file('image')->store('public/images');
 
             $news = new News();
             $news->uuid = (string)Str::uuid();
             $news->title = $request['title'];
             $news->content = $request['content'];
+            $news->image_path = $path;
             $news->uploaded_by = Auth::user()["name"];
             $news->save();
 
@@ -72,10 +77,16 @@ class NewsController extends Controller
         try {
             $request->validate([
                 'title' => 'required|string|max:255',
-                'content' => 'required|string'
+                'content' => 'required|string',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             ]);
 
             $news = News::where('uuid', $uuid)->firstOrFail();
+            if ($request->hasFile('image')) {
+                Storage::delete($news->image_path);
+                $path = $request->file('image')->store('public/images');
+                $news->image_path = $path;
+            }
             $news->title = $request['title'];
             $news->content = $request['content'];
             $news->save();
@@ -94,8 +105,8 @@ class NewsController extends Controller
     {
         try {
             $news = News::where('uuid', $uuid)->firstOrFail();
+            Storage::delete($news->image_path);
             $news->delete();
-
             return ResponseHelper::NoContent();
         } catch (ModelNotFoundException) {
             return ResponseHelper::NotFound('News not found');

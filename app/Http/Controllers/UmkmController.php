@@ -31,6 +31,7 @@ class UmkmController extends Controller
                 'title' => 'required|string|max:255',
                 'description' => 'required|string',
                 'owner' => 'required|string|max:255',
+                'category' => 'required|string|max:255',
                 'contact_person' => 'required|string|max:255',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
                 'google_map_link' => 'required|url',
@@ -44,6 +45,7 @@ class UmkmController extends Controller
             $umkm->description = $request['description'];
             $umkm->owner = $request['owner'];
             $umkm->contact_person = $request['contact_person'];
+            $umkm->category = $request['category'];
             $umkm->image_path = $path;
             $umkm->google_map_link = $request['google_map_link'];
             $umkm->save();
@@ -78,6 +80,7 @@ class UmkmController extends Controller
                 'description' => 'required|string',
                 'owner' => 'required|string|max:255',
                 'contact_person' => 'required|string|max:255',
+                'category' => 'required|string|max:255',
                 'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
                 'google_map_link' => 'required|url',
             ]);
@@ -94,6 +97,7 @@ class UmkmController extends Controller
             $umkm->owner = $request['owner'];
             $umkm->contact_person = $request['contact_person'];
             $umkm->google_map_link = $request['google_map_link'];
+            $umkm->category = $request['category'];
             $umkm->save();
 
             return ResponseHelper::Success('UMKM updated successfully', $umkm);

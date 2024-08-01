@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid()->unique()->primary();
             $table->string('title');
             $table->text('content');
+            $table->string('image_path');
             $table->string('uploaded_by');
             $table->timestamps();
         });
