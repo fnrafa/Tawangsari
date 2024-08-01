@@ -9,6 +9,7 @@ use App\Http\Controllers\StructureController;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
@@ -35,6 +36,19 @@ Route::middleware('auth:api')->group(function () {
     Route::post('profile', [ProfileController::class, 'store']);
     Route::put('profile', [ProfileController::class, 'update']);
     Route::delete('profile', [ProfileController::class, 'destroy']);
+});
+
+Route::get('/public/images/{filename}', function ($filename) {
+    storage_path('app/public/images/' . $filename);
+
+    if (!Storage::disk('public')->exists('images/' . $filename)) {
+        abort(404);
+    }
+
+    $file = Storage::disk('public')->get('images/' . $filename);
+    $type = Storage::disk('public')->mimeType('images/' . $filename);
+
+    return response($file, 200)->header('Content-Type', $type);
 });
 
 Route::fallback(function () {
