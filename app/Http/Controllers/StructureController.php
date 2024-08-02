@@ -18,7 +18,30 @@ class StructureController extends Controller
     {
         try {
             $structures = Structure::all();
-            return ResponseHelper::Success('Structures retrieved successfully', $structures);
+
+            $structureMap = [];
+            foreach ($structures as $structure) {
+                $structureMap[$structure->uuid] = $structure;
+            }
+
+            $sortedStructures = [];
+
+            $buildHierarchy = function ($structure) use (&$sortedStructures, &$structureMap, &$buildHierarchy) {
+                $sortedStructures[] = $structure;
+                foreach ($structureMap as $child) {
+                    if ($child->upper_level_uuid === $structure->uuid) {
+                        $buildHierarchy($child);
+                    }
+                }
+            };
+
+            foreach ($structureMap as $structure) {
+                if (is_null($structure->upper_level_uuid)) {
+                    $buildHierarchy($structure);
+                }
+            }
+
+            return ResponseHelper::Success('Structures retrieved successfully', $sortedStructures);
         } catch (Exception $e) {
             return ResponseHelper::InternalServerError($e->getMessage());
         }
