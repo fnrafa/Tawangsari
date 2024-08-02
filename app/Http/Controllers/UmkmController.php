@@ -64,7 +64,14 @@ class UmkmController extends Controller
     {
         try {
             $umkm = Umkm::where('uuid', $uuid)->firstOrFail();
-            return ResponseHelper::Success('UMKM retrieved successfully', $umkm);
+            $recommendations = Umkm::where('uuid', '!=', $uuid)
+                ->orderBy('created_at', 'desc')
+                ->take(3)
+                ->get();
+            return ResponseHelper::Success('UMKM retrieved successfully', [
+                'umkm' => $umkm,
+                'recommendations' => $recommendations,
+            ]);
         } catch (ModelNotFoundException) {
             return ResponseHelper::NotFound('UMKM not found');
         } catch (Exception $e) {

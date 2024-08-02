@@ -16,7 +16,7 @@ use Illuminate\Support\Str;
  * @property mixed $title
  * @property mixed $owner
  * @property mixed $category
- * @method static where(string $string, $uuid)
+ * @method static where(string $column, $value, $value2 = 0)
  */
 class Umkm extends Model
 {
