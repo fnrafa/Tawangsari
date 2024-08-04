@@ -28,7 +28,7 @@ class CarouselController extends Controller
     {
         try {
             $request->validate([
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp,heic|max:2048',
             ]);
 
             $path = $request->file('image')->store('public/images');
@@ -67,7 +67,7 @@ class CarouselController extends Controller
 
             if ($request->hasFile('image')) {
                 $request->validate([
-                    'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+                    'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp,heic|max:2048',
                 ]);
 
                 Storage::delete($carousel->image_path);

@@ -28,7 +28,7 @@ class GalleryController extends Controller
     {
         try {
             $request->validate([
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp,heic|max:2048',
             ]);
 
             $path = $request->file('image')->store('public/images');
@@ -63,7 +63,7 @@ class GalleryController extends Controller
     {
         try {
             $request->validate([
-                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg,heic|max:2048',
             ]);
 
             $gallery = Gallery::where('uuid', $uuid)->firstOrFail();

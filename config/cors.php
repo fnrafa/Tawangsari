@@ -5,7 +5,7 @@ return [
 
     'allowed_methods' => ['GET', 'POST', 'PUT', 'DELETE'],
 
-    'allowed_origins' => ['http://localhost:5173', 'https://tawangsari.com'],
+    'allowed_origins' => ['http://localhost:5173', 'https://tawangsari.com', 'https://www.tawangsari.com'],
 
     'allowed_origins_patterns' => [],
 

@@ -54,7 +54,7 @@ class StructureController extends Controller
                 'name' => 'required|string|max:255',
                 'level' => 'required|string|max:255',
                 'nip' => 'required|string|max:255',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp,heic|max:2048',
                 'upper_level_uuid' => 'exists:structures,uuid|nullable',
             ]);
 
@@ -97,7 +97,7 @@ class StructureController extends Controller
                 'name' => 'required|string|max:255',
                 'level' => 'required|string|max:255',
                 'nip' => 'required|string|max:255',
-                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp,heic|max:2048',
                 'upper_level_uuid' => 'exists:structures,uuid|nullable',
             ]);
 

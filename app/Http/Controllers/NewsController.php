@@ -78,7 +78,7 @@ class NewsController extends Controller
             $request->validate([
                 'title' => 'required|string|max:255',
                 'content' => 'required|string',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             ]);
 
             $news = News::where('uuid', $uuid)->firstOrFail();

@@ -33,7 +33,7 @@ class UmkmController extends Controller
                 'owner' => 'required|string|max:255',
                 'category' => 'required|string|max:255',
                 'contact_person' => 'required|string|max:255',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp,heic|max:2048',
                 'google_map_link' => 'required|url',
             ]);
 
@@ -88,7 +88,7 @@ class UmkmController extends Controller
                 'owner' => 'required|string|max:255',
                 'contact_person' => 'required|string|max:255',
                 'category' => 'required|string|max:255',
-                'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp,heic|max:2048',
                 'google_map_link' => 'required|url',
             ]);
             $umkm = Umkm::where('uuid', $uuid)->firstOrFail();
