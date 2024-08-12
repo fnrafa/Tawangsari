@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
  * @property mixed $content
  * @property mixed $uploaded_by
  * @property false|mixed|string $image_path
+ * @property mixed $category
  * @method static where(string $column, $value, $value2 = 0)
  */
 class News extends Model

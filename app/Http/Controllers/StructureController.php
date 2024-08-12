@@ -58,6 +58,10 @@ class StructureController extends Controller
                 'upper_level_uuid' => 'exists:structures,uuid|nullable',
             ]);
 
+            if (is_null($request["upper_level_uuid"]) && Structure::whereNull('upper_level_uuid')->exists()) {
+                return ResponseHelper::Conflict('Only one structure can have a null upper_level_uuid.');
+            }
+
             $path = $request->file('image')->store('public/images');
 
             $structure = new Structure();
@@ -102,6 +106,10 @@ class StructureController extends Controller
             ]);
 
             $structure = Structure::where('uuid', $uuid)->firstOrFail();
+
+            if (is_null($request["upper_level_uuid"]) && Structure::whereNull('upper_level_uuid')->where('uuid', '!=', $uuid)->exists()) {
+                return ResponseHelper::Conflict('Only one structure can have a null upper_level_uuid.');
+            }
             if ($request->hasFile('image')) {
                 Storage::delete($structure->image_path);
                 $path = $request->file('image')->store('public/images');
@@ -127,6 +135,9 @@ class StructureController extends Controller
     {
         try {
             $structure = Structure::where('uuid', $uuid)->firstOrFail();
+            if (is_null($structure->upper_level_uuid)) {
+                return ResponseHelper::Conflict('Cannot delete the structure with null upper_level_uuid.');
+            }
             Storage::delete($structure->image_path);
             $structure->delete();
 

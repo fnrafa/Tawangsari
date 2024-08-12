@@ -31,6 +31,7 @@ class NewsController extends Controller
             $request->validate([
                 'title' => 'required|string|max:255',
                 'content' => 'required|string',
+                'category' => 'required|string',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             ]);
 
@@ -40,6 +41,7 @@ class NewsController extends Controller
             $news->uuid = (string)Str::uuid();
             $news->title = $request['title'];
             $news->content = $request['content'];
+            $news->category = $request['category'];
             $news->image_path = $path;
             $news->uploaded_by = Auth::user()["name"];
             $news->save();
@@ -78,6 +80,7 @@ class NewsController extends Controller
             $request->validate([
                 'title' => 'required|string|max:255',
                 'content' => 'required|string',
+                'category' => 'required|string',
                 'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             ]);
 
@@ -89,6 +92,7 @@ class NewsController extends Controller
             }
             $news->title = $request['title'];
             $news->content = $request['content'];
+            $news->category = $request['category'];
             $news->save();
 
             return ResponseHelper::Success('News updated successfully', $news);

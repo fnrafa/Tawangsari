@@ -13,6 +13,8 @@ use Webpatser\Uuid\Uuid;
  * @property mixed|string $password
  * @property mixed $name
  * @property mixed $uuid
+ * @method static firstOrCreate(string[] $array, array $array1)
+ * @method static updateOrCreate(array $array, array $array1)
  */
 class User extends Authenticatable implements JWTSubject
 {

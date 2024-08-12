@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
  * @property false|mixed|string $image_path
  * @property mixed $nip
  * @method static where(string $string, $uuid)
+ * @method static whereNull(string $string)
  */
 class Structure extends Model
 {
