@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('news', function (Blueprint $table) {
-            $table->uuid()->unique()->primary();
-            $table->string('title');
-            $table->text('content');
-            $table->string('image_path');
-            $table->string('uploaded_by');
-            $table->timestamps();
+        Schema::table('news', function (Blueprint $table) {
+            $table->string('category')->default('Kegiatan');
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('news');
+        Schema::table('news', function (Blueprint $table) {
+            $table->dropColumn('category');
+        });
     }
 };
